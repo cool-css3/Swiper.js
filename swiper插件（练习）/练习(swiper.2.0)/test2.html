@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/idangerous.swiper2.7.6.css">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            width: 100%;
+        }
+        .swiper-container{
+            width: 800px;
+            height: 300px;
+            margin: 100px auto;
+
+        }
+        img{
+            width: 100%
+        }
+        .pagination {
+            position: absolute;
+            z-index: 20;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+        .swiper-pagination-switch {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 8px;
+            background: #555;
+            margin: 0 5px;
+            opacity: 0.8;
+            border: 1px solid #fff;
+            cursor: pointer;
+        }
+        .swiper-active-switch {
+            background: #fff;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="swiper-container" >
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="../img/1.jpeg" alt=""></div>
+            <div class="swiper-slide"><img src="../img/2.jpeg" alt=""></div>
+            <div class="swiper-slide"><img src="../img/3.jpeg" alt=""></div>
+            <div class="swiper-slide"><img src="../img/3.jpeg" alt=""></div>
+
+        </div>
+        <div class="pagination"></div>
+
+    </div>
+
+</body>
+</html>
+<script src="js/idangerous.swiper2.7.6.js"></script>
+<script src="js/idangerous.swiper.progress.min.js"></script>
+<script>
+
+
+    var mySwiper = new Swiper('.swiper-container',{
+        loop:true,
+//        autoplay: 1000,
+        speed:2000,
+
+        //设定progress参数为true时启用 Smooth Progress 插件
+        progress: true,
+        //启用 Smooth Progress 插件后会增加一个回调函数onProgressChange
+        onProgressChange: function(swiper) {
+            //插件会在每个slide上面增加一个progress属性，同时在swiper也增加一个property属性
+            for (var i = 0; i < swiper.slides.length; i++) {
+                var slide = swiper.slides[i];
+                var progress = slide.progress;
+                //根据slide的progress属性实现某些效果
+//                swiper.setTransform(slide,'rotate('+90*progress+'deg)');
+                swiper.setTransform(slide,'rotateY('+360*progress+'deg)');
+            }
+
+        },
+        onSetWrapperTransition: function(swiper, speed) {
+            for (var i = 0; i < swiper.slides.length; i++){
+                swiper.setTransition(swiper.slides[i], speed);
+            }
+        }
+    });
+
+</script>
